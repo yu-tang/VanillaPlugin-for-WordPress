@@ -151,7 +151,7 @@ function vf_validate_options($options) {
 				vf_configure_embed_container();
 			} else {
 				$options['url'] = '';
-				add_settings_error('url', 'url', 'Forum url could not be validated. Are you sure you entered the correct web address of your forum?'); 
+				add_settings_error('url', 'url',  __('Forum url could not be validated. Are you sure you entered the correct web address of your forum?', 'vanilla-forums')); 
 			}
 			break;
 		case 'embed-form':
@@ -207,7 +207,7 @@ function vf_format_activity($Activity, $Url) {
 	$GenderSuffixGender = $Activity->ActivityGender;
 	
 	if ($ViewingUserID == $Activity->ActivityUserID) {
-		$ActivityName = $ActivityNameP = 'You';
+		$ActivityName = $ActivityNameP = __('You', 'vanilla-forums');
 	} else {
 		$ActivityName = $Activity->ActivityName;
 		$ActivityNameP = vf_format_possessive($ActivityName);
@@ -271,7 +271,7 @@ function vf_format_activity($Activity, $Url) {
 	$ProfileHeadline = $Activity->ProfileHeadline;
 	$MessageFormat = ($ProfileUserID == $Activity->ActivityUserID || $ProfileUserID == '' ? $FullHeadline : $ProfileHeadline);
 	
-	return sprintf($MessageFormat, $ActivityName, $ActivityNameP, $RegardingName, $RegardingNameP, $RegardingWall, $Gender, $Gender2, $Route, $GenderSuffix);
+	return sprintf(__($MessageFormat, 'vanilla-forums'), $ActivityName, $ActivityNameP, $RegardingName, $RegardingNameP, $RegardingWall, __($Gender, 'vanilla-forums'), __($Gender2, 'vanilla-forums'), $Route, $GenderSuffix);
 }
 
 function vf_anchor($text, $destination, $url = '') {
@@ -285,6 +285,8 @@ function vf_anchor($text, $destination, $url = '') {
 }
 
 function vf_format_possessive($word) {
+   // if lang ja
+   if (WPLANG == 'ja') return $word;
    return substr($word, -1) == 's' ? $word."'" : $word."'s";
 }
 

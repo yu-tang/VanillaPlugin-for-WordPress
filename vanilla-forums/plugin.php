@@ -6,6 +6,8 @@ Description: Adds deep integration for Vanilla Forums to Wordpress, including: t
 Version: 1.0.5
 Author: Mark O'Sullivan
 Author URI: http://www.vanillaforums.org/
+Text Domain: vanilla-forums
+Domain Path: /languages
 
 ChangeLog:
 1.0.4
@@ -30,6 +32,8 @@ Contact Vanilla Forums Inc at support [at] vanillaforums [dot] com
 define('VF_OPTIONS_NAME', 'vf-options');
 define('VF_PLUGIN_PATH', dirname(__FILE__));
 define('VF_PLUGIN_URL', WP_PLUGIN_URL.'/'.plugin_basename(dirname(__FILE__)));
+$lang = dirname(plugin_basename( __FILE__ )) . "/languages";
+load_plugin_textdomain("vanilla-forums", 'wp-content/plugins/'.$lang, $lang);
 
 include_once(VF_PLUGIN_PATH.'/functions.php'); 
 include_once(VF_PLUGIN_PATH.'/admin.php');
